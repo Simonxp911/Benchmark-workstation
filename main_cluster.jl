@@ -44,6 +44,10 @@ function runBenchmark(benchmarkName)
             printTrial(result[2])
             println("")
         end
+        
+        postfix = postfix_benchmarkResult(benchmarkName, "workstation", commSize)
+        filename = "bRes" * postfix
+        save_as_jld2(results, saveDir, filename)
     end
 end
 

@@ -11,6 +11,9 @@ using LinearAlgebra     #norm of vectors and other standard linear algebra
 using OrdinaryDiffEq    #solve differential equation for time-evolution or steady state
 using NonlinearSolve    #addition to OrdinaryDiffEq for nonlinear EoMs
 using Bessels           #Bessel functions for fiber equation and modes
+using Colors            #for generating distinguishable colors
+using LaTeXStrings      #LaTeX formatting in string in plots
+using JLD2              #saving and loading
 
 
 # ================================================

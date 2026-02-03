@@ -5,11 +5,12 @@ Plot the benchmark trial results as bars to compare across our
 local laptop, using a single CPU (two threads) on the cluster,
 and running in parallel on five CPUs (ten threads) on the cluster
 """
-function fig_compareBenchmarks(benchmarkName, samples, results)
+function fig_compareBenchmarks(benchmarkName, results)
     nBars = length(results)
+    benchmark = getBenchmark(benchmarkName) 
     
     # Set title, labels, and colors
-    titl = L"Results from running the benchmark \"%$(benchmarkName)\" (%$(samples) samples)\\ Bar shows mean, range shows min/max$$"
+    titl = L"Results from running the benchmark \"%$(benchmarkName)\" (%$(benchmark.params.samples) samples)\\ Bar shows mean, range shows min/max$$"
     labels = [latexstring(result[1], "\$\$") for result in results]
     colors = distinguishable_colors(nBars, [RGB(1,1,1), RGB(0,0,0)], dropseed=true)
     

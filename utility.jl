@@ -59,3 +59,24 @@ end
 # ================================================
 #   Saving and loading functions
 # ================================================
+function save_as_jld2(data, saveDir, filename)
+    JLD2.save(saveDir * filename * ".jld2", "data", data)
+end
+
+
+function load_as_jld2(saveDir, filename)
+    return load(saveDir * filename * ".jld2", "data")
+end
+
+
+"""
+Postfix for saving/loading the benchmark results
+"""
+function postfix_benchmarkResult(benchmarkName, computerDesc, commSize=nothing)
+    postfix_components = [
+        benchmarkName, 
+        computerDesc
+    ]
+    if !isnothing(commSize) push!(postfix_components, "cS_$commSize") end
+    return join(postfix_components, "_")
+end

@@ -5,7 +5,7 @@ Simple function to get the benchmark described by benchmarkName
 """
 function getBenchmark(benchmarkName)
     if     benchmarkName == "matrixInversion"     return benchmark_matrixInversion()
-    elseif benchmarkName == "matrixEigenbasis"    return returnbenchmark_matrixEigenbasis()
+    elseif benchmarkName == "matrixEigenbasis"    return benchmark_matrixEigenbasis()
     elseif benchmarkName == "solveFiberEquation"  return benchmark_solveFiberEquation()
     else
         throw(ArgumentError("benchmarkName = $benchmarkName was not recognized in getBenchmark"))
