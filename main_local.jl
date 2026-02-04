@@ -11,26 +11,12 @@ using GLMakie           #for plotting, incl. specialized interactive plots
 # ================================================
 function main()
     
-    
-    
-    # # TEMP
-    # results = []
-    # for benchmarkName in ["matrixInversion", "matrixEigenbasis", "solveFiberEquation"]
-    #     benchmark = getBenchmark(benchmarkName)
-    #     trial = run(benchmark)
-    #     push!(results, [benchmarkName, trial])
-    # end
-    
-    # fig_compareBenchmarks("test", 0, results)
-    # # TEMP
-    
-    
-    
     # Choose which benchmark to run from ["matrixInversion", "matrixEigenbasis", "solveFiberEquation"]
-    benchmarkName = "solveFiberEquation"
+    benchmarkName = "matrixEigenbasis"
+    
     
     runBenchmark(benchmarkName)
-    
+    # plot_benchmarkResults(benchmarkName)
 end
 
 
@@ -41,7 +27,7 @@ function runBenchmark(benchmarkName)
     println("Local laptop results:")
     printTrial(trial)
     
-    results = [["laptop", trial]]
+    results = [["Laptop", trial]]
     postfix = postfix_benchmarkResult(benchmarkName, "laptop")
     filename = "bRes_" * postfix
     save_as_jld2(results, saveDir, filename)
@@ -51,7 +37,7 @@ end
 function plot_benchmarkResults(benchmarkName)
     results = []
     for (computerDesc, commSize) in zip(["laptop", "workstation", "workstation"],
-                                        [nothing, 10, 1])
+                                        [nothing, 4, 1])
         postfix = postfix_benchmarkResult(benchmarkName, computerDesc, commSize)
         filename = "bRes_" * postfix
         append!(results, load_as_jld2(saveDir, filename))

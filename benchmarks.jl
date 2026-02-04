@@ -26,8 +26,8 @@ end
 Find eigenbasis of a random 1000x1000 matrix
 """
 function benchmark_matrixEigenbasis()
-    A = rand(1000, 1000)
-    return @benchmarkable eigen($A) samples = 100 seconds = 1000
+    A = rand(3000, 3000)
+    return @benchmarkable eigen($A) samples = 100 seconds = 3600
 end
 
 
