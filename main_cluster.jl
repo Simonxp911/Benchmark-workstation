@@ -12,10 +12,10 @@ if length(ARGS) >= 3
 else
     const nJTh = "not set ($(Threads.nthreads()))"
 end
+const nBTh = ARGS[4]
+BLAS.set_num_threads(nBTh)
 
-BLAS.set_num_threads(1) #necessary on the workstation for LinearAlgebra to work properly
-
-using MPI               #for parallel computing
+using MPI
 MPI.Init()
 const comm   = MPI.COMM_WORLD
 const root   = 0
@@ -27,23 +27,6 @@ const nMPI   = MPI.Comm_size(comm)
 #   Main functions
 # ================================================
 function main()
-    
-    
-    # TEMP
-    # println(Threads.nthreads())
-    
-    # a = zeros(10)
-    # Threads.@threads for i = 1:10
-    #     a[i] = Threads.threadid()
-    # end
-    # println(a)
-    
-    
-    # println(nCPU)
-    # println(nMPI)
-    # println(nJTh)
-    # TEMP
-    
     
     # Choose which benchmark to run from ["matrixInversion", "matrixEigenbasis", "solveFiberEquation"]
     benchmarkName = "matrixEigenbasis"
@@ -64,14 +47,14 @@ function runBenchmark(benchmarkName)
     if myRank == root
         sort!(results, by=x->x[1])
         println("")
-        println("Printing results from running the benchmark '$benchmarkName' ($(benchmark.params.samples) samples)")
+        println("Printing results from running the benchmark '$benchmarkName'")
         for result in results
             println(result[1])
             printTrial(result[2])
             println("")
         end
         
-        postfix = postfix_benchmarkResult(benchmarkName, "workstation", nCPU, nMPI, nJTh)
+        postfix = postfix_benchmarkResult(benchmarkName, "workstation", nCPU, nMPI, nJTh, nBTh)
         filename = "bRes_" * postfix
         save_as_jld2(results, saveDir, filename)
     end

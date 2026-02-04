@@ -72,13 +72,14 @@ end
 """
 Postfix for saving/loading the benchmark results
 """
-function postfix_benchmarkResult(benchmarkName, computerDesc, nCPU=nothing, nMPI=nothing, nJTh=nothing)
+function postfix_benchmarkResult(benchmarkName, computerDesc, nCPU=nothing, nMPI=nothing, nJTh=nothing, nBTh=nothing)
     postfix_components = [
         benchmarkName, 
         computerDesc
     ]
     if !isnothing(nCPU) push!(postfix_components, "nCPU_$nCPU") end
     if !isnothing(nMPI) push!(postfix_components, "nMPI_$nMPI") end
-    if !isnothing(nMPI) push!(postfix_components, "nJTh_$nJTh") end
+    if !isnothing(nJTh) push!(postfix_components, "nJTh_$nJTh") end
+    if !isnothing(nBTh) push!(postfix_components, "nBTh_$nBTh") end
     return join(postfix_components, "_")
 end
