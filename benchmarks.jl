@@ -14,16 +14,16 @@ end
 
 
 """
-Perform inversion of a random 1000x1000 matrix
+Perform inversion of a random 3000x3000 matrix
 """
 function benchmark_matrixInversion()
-    A = rand(1000, 1000)
+    A = rand(3000, 3000)
     return @benchmarkable inv($A) samples = 100 seconds = 1000
 end
 
 
 """
-Find eigenbasis of a random 1000x1000 matrix
+Find eigenbasis of a random 3000x3000 matrix
 """
 function benchmark_matrixEigenbasis()
     A = rand(3000, 3000)

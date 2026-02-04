@@ -65,18 +65,20 @@ end
 
 
 function load_as_jld2(saveDir, filename)
-    return load(saveDir * filename * ".jld2", "data")
+    return JLD2.load(saveDir * filename * ".jld2", "data")
 end
 
 
 """
 Postfix for saving/loading the benchmark results
 """
-function postfix_benchmarkResult(benchmarkName, computerDesc, commSize=nothing)
+function postfix_benchmarkResult(benchmarkName, computerDesc, nCPU=nothing, nMPI=nothing, nJTh=nothing)
     postfix_components = [
         benchmarkName, 
         computerDesc
     ]
-    if !isnothing(commSize) push!(postfix_components, "cS_$commSize") end
+    if !isnothing(nCPU) push!(postfix_components, "nCPU_$nCPU") end
+    if !isnothing(nMPI) push!(postfix_components, "nMPI_$nMPI") end
+    if !isnothing(nMPI) push!(postfix_components, "nJTh_$nJTh") end
     return join(postfix_components, "_")
 end
